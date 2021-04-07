@@ -66,9 +66,16 @@ WHERE employee_id = '150';
 
  
 -- 5. 커미션(commission_pct)을 받는 모든 사원들의 last_name, salary, commission_pct 를 조회한다.
+-- 5-1) where절
 SELECT last_name, salary, commission_pct
  FROM employees
 WHERE commission_pct IS NOT NULL;
+
+
+-- 5-2) nvl(표현식, null)
+SELECT last_name, salary, commission_pct
+ FROM employees
+WHERE nvl(commission_pct, 0) != 0;
 
 
 -- 6. 모든 사원들의 last_name, commission_pct 를 조회하되 커미션(commission_pct)이 없는 사원은 0으로 처리하여 조회한다.
@@ -76,11 +83,12 @@ SELECT last_name, nvl(commission_pct, 0) AS commission_pct
  FROM employees;
 
 
--- 7. 커미션(commission_pct)이 없는 사원들은 0으로 처리하고, 커미션이 있는 사원들은 기존 커미션보다 10% 인상된 상태로 조회한다.
+-- 7. 커미션(commission_pct)이 없는 사원들은 0으로 처리하고, 커미션이 있는 사원들은 기존 커미션보다 10% 인상된 상태로 조회(last_name)한다.
 -- 7-1) where절
 SELECT last_name, commission_pct * 1.1 AS new_commission_pct
  FROM employees
 WHERE commission_pct IS NOT NULL;
+ 
  
 -- 7-2) nvl2(표현식, not null, null)
 SELECT last_name, nvl2(commission_pct, commission_pct * 1.1, 0) AS new_commission_pct
@@ -89,8 +97,12 @@ SELECT last_name, nvl2(commission_pct, commission_pct * 1.1, 0) AS new_commissio
 
 -- 8. 연봉(salary)이 5000 에서 12000 인 범위의 사원들의 first_name, last_name, salary 를 조회한다.
 SELECT first_name, last_name, salary
+FROM employees
+WHERE salary BETWEEN 5000 AND 12000;
+
+SELECT first_name, last_name, salary
  FROM employees
-WHERE salary < 5000 OR salary > 12000;
+WHERE salary >= 5000 AND salary <= 12000;
  
  
 -- 9. 연봉(salary)이 5000 에서 12000 사이의 범위가 아닌 사원들의 first_name, last_name, salary 를 조회한다.
@@ -98,8 +110,12 @@ SELECT first_name, last_name, salary
  FROM employees
 WHERE salary NOT BETWEEN 5000 AND 12000;
 
+SELECT first_name, last_name, salary
+ FROM employees
+WHERE salary < 5000 OR salary > 12000;
 
--- 10. 직업(job_id)이 SA_REP 이나 ST_CLERK 인 사원들의 전체 칼럼을 조회한다.
+
+-- 10. 직업(job_id)이 SA_REP 이거나 ST_CLERK 인 사원들의 전체 칼럼을 조회한다.
 SELECT employee_id, first_name, last_name, email, phone_number, hire_date, job_id, salary, commission_pct, manager_id, department_id
  FROM employees
 WHERE job_id='SA_REP' OR job_id='ST_CLERK';
@@ -131,6 +147,7 @@ CREATE TABLE emp
 ALTER TABLE emp ADD CONSTRAINT emp_pk PRIMARY KEY(emp_id);
 ALTER TABLE emp ADD CONSTRAINT emp_emp_fk FOREIGN KEY(manager_id) REFERENCES emp(emp_id);
 DROP TABLE emp;
+
 
 
 
