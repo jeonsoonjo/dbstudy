@@ -25,7 +25,6 @@ ALTER TABLE members MODIFY point DEFAULT 1000; -- point에 기본값 주기
 ALTER TABLE members ADD CONSTRAINT grade_ch CHECK (grade IN('VIP', 'GOLD', 'SILVER', 'BRONZE'));
 
 
-
 -- 2. 새로운 칼럼을 추가하시오.
 --    1) 회원주소: ADDRESS VARCHAR2(200)
 --    2) 회원가입일: REGDATE DATE
@@ -34,25 +33,20 @@ ALTER TABLE members ADD regdate DATE;
 DESC members;
 
 
-
 -- 3. 추가된 회원주소 칼럼을 다시 삭제하시오.
 ALTER TABLE members DROP COLUMN address;
-
 
 
 -- 4. 회원등급 칼럼의 타입을 VARCHAR2(20)으로 수정하시오.
 ALTER TABLE members MODIFY grade VARCHAR2(20);
 
 
-
 -- 5. 회원패스워드 칼럼의 이름을 PWD로 수정하시오.
 ALTER TABLE members RENAME COLUMN pw TO pwd;
 
 
-
 -- 6. 회원번호 칼럼에 기본키를 설정하시오.
 ALTER TABLE members ADD CONSTRAINT member_no_pk PRIMARY KEY(no);
-
 
 
 -- 7. 다음 칼럼 정보를 이용하여 BOARD2 테이블을 생성하시오.
@@ -73,16 +67,13 @@ CREATE TABLE board2
 );
 
 
-
 -- 8. 조회수 칼럼의 타입을 NUMBER로 수정하시오.
 ALTER TABLE board2 MODIFY hit NUMBER;
 DESC board2;
 
 
-
 -- 9. 글내용 칼럼의 필수 제약조건을 제거하시오.
 ALTER TABLE board2 MODIFY content VARCHAR2(4000) NULL;
-
 
 
 -- 10. 글번호에 기본키와  작성자 칼럼에 MEMBERS 테이블의 회원아이디를 참조하는 외래키를 설정하시오.

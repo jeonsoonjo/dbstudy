@@ -128,11 +128,11 @@ FROM employee e LEFT OUTER JOIN department d
     
 -- 1-2) WHERE절 사용 : 일치하는 정보만 출력되는 칼럼명에 (+)
 SELECT
-          e.emp_no
-        , e.name
-        , d.dept_name
-        , e.position
-FROM employee e, department d
+           e.emp_no
+         , e.name
+         , d.dept_name
+         , e.position
+ FROM employee e, department d
 WHERE e.depart = d.dept_no(+); 
   
 -- 2-1) RIGHT OUTER JOIN ~ ON 비교(왼쪽 테이블은 일치하는 정보만 출력되고, 오른쪽 테이블은 모두 출력된다)
@@ -164,11 +164,11 @@ where e.depart(+) = d.dept_no;
     4               0
 */
 SELECT
-          d.dept_no
-        , COUNT(e.depart) AS 사원수 -- count(*)로 했으면 모든 칼럼이 나와서 0이 나오지 않는다
- FROM department d LEFT OUTER JOIN employee e
- ON d.dept_no=e.depart
- GROUP BY d.dept_no;
+            d.dept_no
+          , COUNT(e.depart) AS 사원수 -- count(*)로 했으면 모든 칼럼이 나와서 0이 나오지 않는다
+  FROM department d LEFT OUTER JOIN employee e
+      ON d.dept_no=e.depart
+GROUP BY d.dept_no;
  
 -- 리뷰1. 모든 사원들의 name, dept_name을 조회하기(부서가 없는 사원은 조회하지 말기)
 SELECT
