@@ -31,7 +31,7 @@ public class MembersHandler {
 	public void execute() {
 		while(true) {
 			menu();
-			System.out.print("선택(0~) >>> ");
+			System.out.print("선택(0~6) >>> ");
 			switch(sc.nextInt()) {
 			case 0 : System.out.println("프로그램을 종료합니다"); return;
 			case 1 : join(); break;
@@ -151,20 +151,5 @@ public class MembersHandler {
 		}
 		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }
